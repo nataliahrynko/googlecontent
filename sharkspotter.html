@@ -33,15 +33,33 @@ h1 {
 <body>
 
     <div class = "container">
-        <div class= "h1">
         <h1>The Map on  Sharkspotting</h1>
-        </div>
         <hr>
-        <div class= "p1">
         <p>People Like to look for sharks here</p>
         <iframe id="map" src="https://www.google.com/maps/d/embed?mid=1qEQ89_5MNrDbnS7tT5R9SbPXLr1Odc-1" 
         title="Sharkspotting"></iframe>
-        </div>
+    </div>
+    <!-- How it worksL http://maps.googleapis.com/maps/api/directions/outputFormat?parameters
+     the output format is JSON,(could also be xml but best not) and parameters origin and destination
+    can add optional parameters like mode, waypoints -things along the way, alternatives -different
+    ways of getting paces, and things to avoid (tolls/highways/ferries), language, units, departuretime, etc -->
+    <div>
+        <h1>Direections Api</h1>
+        <p> origin= University of Toronto</p>
+        <p>geocoded to "start_address" : "27 King's College Cir, Toronto, ON M5S, Canada", </p>
+        <p> destination= Holbrooke Avenue Toronto</p>
+        <p>geocoded to "end_address" : "Holbrooke Ave, Toronto, ON M8Y, Canada",, </p>
+        <p>mode=transit (cound have been driving, walking, bicycling, etc)</p>
+        <p>To view the JSON code for these directions are 
+        <a href="https://maps.googleapis.com/maps/api/directions/json?origin=University+of+Toronto&destination=Holbrooke+Avenue+Toronto&mode=transit&key=AIzaSyDhKfg34y5LqmiTvW4CL3QxXapX8MxlWOg">HERE</a></p>
+    </div>
+    <div>
+    <h>Places API</h>
+    <p>Through search by findplacefromtext you can search the name, the alternative is placeid</p>
+    <!-- How it works: https://maps.googleapis.com/maps/api/place/details/output?parameters
+    some optional parameters can be rating, review, price_level, address_component, url, etc-->
+    <p>To view the json code for the place is 
+        <a href="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=University+of+toronto&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyDhKfg34y5LqmiTvW4CL3QxXapX8MxlWOg">HERE</a></p>    
     </div>
 </body>
 </html>
