@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
+  
   <head>
     <title>Simple Map</title>
+    <!-- poilygfill fills in the gas between different browesrs so they all work -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!--when script it must fetch and execute that script, th page waits. If you put it in the html it
+    gets the ful html and then script fetching at the end. 
+    Async you parse the html and fetch the script then once it is parsed it is executed then finished.
+    Does more work at the same time. With defer it executes the script at the end. 
+    Scripts are put in different places dependant on the specific script -->
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhKfg34y5LqmiTvW4CL3QxXapX8MxlWOg&callback=initMap&libraries=&v=weekly"
       defer
@@ -10,11 +17,12 @@
     <style type="text/css">
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
+      #mapDiv {
         height: 100%;
       }
 
-      /* Optional: Makes the sample page fill the window. */
+      /* Optional: Makes the sample page fill the window. Needs the height to be 100 and the 
+      width is not speified because it defaults the the height. YOu can set a widt and it will bbound to that */
       html,
       body {
         height: 100%;
@@ -22,11 +30,16 @@
         padding: 0;
       }
     </style>
+    <!--this script is a function, only the let map is read; is a variable (let therefore local not var-global)
+    the initMap is a function that i declared (it is javascript and only run when needed). The script that
+    is defered calls the initmap function (look at URL).
+    If you look in the function the Map() is the constructor and then it has a div element (any html container),
+    and an option-->
     <script>
-      let map;
+      let mapvar;
 
       function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
+        mapvar = new google.maps.Map(document.getElementById("mapDiv"), {
           center: { lat: -34.397, lng: 150.644 },
           zoom: 8,
         });
@@ -34,6 +47,6 @@
     </script>
   </head>
   <body>
-    <div id="map"></div>
+    <div id="mapDiv"></div>
   </body>
 </html>
