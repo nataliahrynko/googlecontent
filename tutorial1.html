@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>University of Toronto</title>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhKfg34y5LqmiTvW4CL3QxXapX8MxlWOg&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 450px;
+        /* The height is 450 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+    </style>
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of University of Toronto (UofT)
+        const UofT = { lat: 43.662794, lng: -79.395654 };
+        // The map, centered at UofT
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 17,
+          center: UofT,
+        });
+        // The marker, positioned at UofT
+        const marker = new google.maps.Marker({
+          position: UofT,
+          map: map,
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h3>Where I got my Diploma!</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+  </body>
+</html>
