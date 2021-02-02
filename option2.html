@@ -1,0 +1,202 @@
+    <!-- Code created by: Natalia Hrynko
+    Code used to fullfill option 2 in Assignment 1
+  Code last modified February 2, 2021-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Radiotracking Snakes</title>
+    <!-- Code used to call on bootstrap to help with formatting-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhKfg34y5LqmiTvW4CL3QxXapX8MxlWOg&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      /* This sets the size of the google map */
+      #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 400px;
+        /* The width is the width of the web page */
+        align-items: center;
+      }
+      *{ font: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+        
+      }
+      body {
+        background-color: #9c8b707e;
+        color:black;
+        text-align: center;
+      }
+      h {
+        font-size: 50px;
+        color:white
+      }
+      h1 {
+        font-size:large;
+        color:  #427065;
+        font-weight: bold;
+      }
+      h2 {
+        font-size:large;
+        color: white;
+        font-weight: bold;
+        margin: 20px
+      }
+      p {
+        font-size:medium;
+        padding-bottom: 20px
+      }
+      p2 {
+        font-size:medium;
+        color: white;
+        text-align: center;
+        padding-top:25px;
+      }
+
+      .col-md-6 {
+        background-color:#32554d;
+        padding:50px;
+        align-items:center;
+      }
+
+      .container-fluid {
+        background-color: #427065;
+        align-items:center;
+      }
+
+    </style>        
+        <script>
+          /* This script sets the locatons of the snakes, their names and their info window content as lists that the 
+          function will later iterate through*/
+    var locations = [
+        [' Tue Feb 04  ', 14.47375894 , 101.9025984 , '<h1>NAKA035 Movement</h1><br/><p> NAKA035 was found here on  Tue Feb 04   and  10:37:00 . NAKA035 had moved  238 m  NNE  from its previous location</p>','1'],
+        [' Wed Feb 05  ', 14.48404809 , 101.8928883 , '<h1>NAKA035 Movement</h1><br/><p> NAKA035 was found here on  Wed Feb 05   and  9:30:00 . NAKA035 had moved  1600 m  NW  from its previous location</p>','2'],
+        [' Thu Feb 06 ', 14.48343903 , 101.8910079 , '<h1>NAKA035 Movement</h1><br/><p> NAKA035 was found here on  Thu Feb 06  and  10:26:00 . NAKA035 had moved  27 m  NE  from its previous location</p>','3'],
+        [' Fri Feb 07 ', 14.48766583 , 101.893204 , '<h1>NAKA035 Movement</h1><br/><p> NAKA035 was found here on  Fri Feb 07  and  9:15:00 . NAKA035 had moved  463 m  NE  from its previous location</p>','4'],
+        [' Fri Feb 07 ', 14.49449444 , 101.8997259 , '<h1>NAKA035 Movement</h1><br/><p> NAKA035 was found here on  Fri Feb 07  and  10:43:00 . NAKA035 had moved  1210 m  NE  from its previous location</p>','5'],
+        ];
+    
+        /* THis is calling the map and setting where the center should be. It is also setting the base map and scale*/
+    function initMap() {
+        var myLatLng = {lat: 14.485594,  lng: 101.900160};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: myLatLng,
+            mapTypeId:'satellite'
+            });
+
+        /*In order to set the locations for the markers, the function will iterate through the lists (this is a for loop)
+        and access the lat in the [1] spot and the long in the [2] spot of each list. The label is also specified here [4]*/
+        var count=0;
+
+        for (count = 0; count < locations.length; count++) {  
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[count][1], locations[count][2]),
+                map: map,
+                icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|339966|FFF',//This google marker specifies colors and type
+                size: new google.maps.Size(25, 25),
+                label:  {
+                  color: 'black', //This is setting marker parameters for the label
+                  fontSize: '10px',
+                  fontWeight: '900',
+                  text: locations[count][4],
+                }
+                });
+
+            marker.info = new google.maps.InfoWindow({
+                content: locations[count][3]
+                });     //This is the info window that will popup and it is setting the content to be the [3] 
+                       //item in the list
+
+            google.maps.event.addListener(marker, 'click', function() {  
+                // this = marker, makes it so when you click the marker it pops up
+                var marker_map = this.getMap();
+                this.info.open(marker_map, this);
+            });
+
+        }    //This is where the marker function stops and is no longer itereating through the string
+
+                // This is setting the points for the polyline to go through. They are the same as the markers.
+            const NakaCoordinates = [
+
+                { lat:  14.47375895 , lng:  101.9025985  },
+                { lat:  14.48404805 , lng:  101.8928885  },
+                { lat:  14.48343905 , lng:  101.8910075  },
+                { lat:  14.48766585 , lng:  101.893205  },
+                { lat:  14.49449445 , lng:  101.8997255  },
+                ];
+
+                //THis is imprementing the polyline as another layer and sets the visual parameters
+            var NakaPath= new google.maps.Polyline({
+                path: NakaCoordinates,
+                geodesic: true,
+                strokeColor: '#339966',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+                });
+
+            NakaPath.setMap(map); //this sets the line within the map
+    }   // This ends what is being coded within the initialized map
+</script>
+</head>
+  <body>
+    <div class= "container-fluid">
+      <h>Radiotracking Snakes in Thailand</h>
+    </div>
+    <div class= "container">
+    <h1> The <i>Naja</i> Project </h1>
+    <p>In September of 2019 I began a 6-month internship working with a group of researchers
+      who studied the spatial ecology of Monocled and Indochinese Spitting Cobras
+      respectively <i>Naja Kaouthia</i> and <i>Naja siamensis</i> hence the name <i>Naja</i> Project. Working with
+      a team of interns, my job entailed conducting daily location for between 6 to 13 snakes using 
+      radio telemetry. The goal of the project is to better understand how thses two species use 
+      their environment. </p>
+    <p>In the map below I attempt to map out the general ranges during my six months for
+      6 snakes. Each snake is named using the first 2 letters of their scientific name and assigned a number according to 
+      how many snakes of that specific species were previously recorded by the project.
+      Additionally I mapped out key areas that were staples of my everyday life while at the station (coloured in pink) and spots that myself and other
+      interns went to go looking for additional reptiles at night (termed "herping", coloured in green). </p>
+      <!--This is a mymaps iframe added for more context with the later on map.-->
+    <p><iframe src="https://www.google.com/maps/d/embed?mid=14YM-FNV-ePVemn7aXa1ELXwkBCzH_87F" width="640" height="480"></iframe></p>
+    
+    <h1><i>Naja Kaouthia</i> and <i>Naja siamensis</i></h1>
+    <p>Although snakes may seem like they may have trouble moving long distances due to the no hands
+      and feet thing, let me tell you these snakes can MOVE. In my 6-month expereince we had bi-daily movements
+      of over 2km. For a snake that does not generally get more than 1.5m long that is quite the trek to make
+      in under 6 hours. Although they were sometimes a pain to follow through the bush as some of them really loved
+      Thorn Moracea Forests (forests with trees that have spikes EVERYWHERE) or the incredibly dense Evergreen Decidious
+      Forests, these snakes made very interesting subjects as they seemed to have an incredible sense of direction
+      and would often revisit specific shelters over the months and remain within a specific area for the majority of
+      their lives. 
+    </p>
+    
+    <div class= "row">
+    <div class= "col-md-6">
+        <h2>Tracking NAKA035 for a Week</h2>
+        <p2>In the following map I show one week of movements for NAKA035, also known as <i>Naja Kaouthia</i> 35.
+        You can follow the polylines and each point will prompt a popup infowindow that informs you on the distance
+        and direction the snake moved. This snake was located in a reasearch station and was often radiotracked into 
+        thick Evergreen Decidious Forest. This snake also preffered to shelter within rock complexes. This is data 
+        from a week where the snake was mainly being triangulated (from a distance of 10 to 30m) and not pinpointed (when the assigned
+        whereabouts are unknown.</p2>
+    </div>
+    <div class= "col-md-6">
+      <h2>Naka 35 Movements</h2>
+      <!--This calls the map that was created in the script-->
+        <div id="map"></div>
+    </div>
+    <p1>*Although a MyMaps map is included to add more context
+      this page is meant to fullfill the requirements in option 2 with the Naka035 Movements map.</p1>
+</div>
+
+  </div>
+</body>
+</html>
