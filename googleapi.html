@@ -1,0 +1,65 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<style type="text/css">
+* {
+  background-color:beige;
+  font-family:'Courier New', Courier, monospace;
+  color: rgb(8, 8, 131);
+  text-align: center;
+}
+p {
+    font-size: medium;
+}   
+
+h {
+    font-size: large;
+    font-weight:bold;
+}
+.container {
+  padding:20%;
+}
+
+</style>
+<title> Google API </title>
+
+</head>
+
+<body>
+
+    <div class = "container">
+
+
+    <!-- How it worksL http://maps.googleapis.com/maps/api/directions/outputFormat?parameters
+     the output format is JSON,(could also be xml but best not) and parameters origin and destination
+    can add optional parameters like mode, waypoints -things along the way, alternatives -different
+    ways of getting paces, and things to avoid (tolls/highways/ferries), language, units, departuretime, etc -->
+
+        <h>Directions Api</h>
+        <p> origin= University of Toronto</p>
+        <p>geocoded to "start_address" : "27 King's College Cir, Toronto, ON M5S, Canada", </p>
+        <p> destination= Holbrooke Avenue Toronto</p>
+        <p>geocoded to "end_address" : "Holbrooke Ave, Toronto, ON M8Y, Canada",, </p>
+        <p>mode=transit (cound have been driving, walking, bicycling, etc)</p>
+        <p>To view the JSON code for these directions are 
+        <a href="https://maps.googleapis.com/maps/api/directions/json?origin=University+of+Toronto&destination=Holbrooke+Avenue+Toronto&mode=transit&key=AIzaSyDhKfg34y5LqmiTvW4CL3QxXapX8MxlWOg">HERE</a></p>
+
+
+    <h>Places API</h>
+    <p>Through search by findplacefromtext you can search the name, the alternative is placeid</p>
+    <!-- How it works: https://maps.googleapis.com/maps/api/place/details/output?parameters
+    some optional parameters can be rating, review, price_level, address_component, url, etc-->
+    <p>To view the json code for University of Toronto click 
+        <a href="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=University+of+toronto&inputtype=textquery&fields=formatted_address,name,rating,geometry&key=AIzaSyDhKfg34y5LqmiTvW4CL3QxXapX8MxlWOg">HERE</a></p>    
+        <p>To view the json code for the AGO click 
+          <a href="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Art+Gallery+of+Ontario&inputtype=textquery&key=AIzaSyDhKfg34y5LqmiTvW4CL3QxXapX8MxlWOg&fields=formatted_address,name,rating,opening_hours,price_level">HERE</a></p>      
+      </div>
+</body>
+</html>

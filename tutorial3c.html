@@ -42,15 +42,15 @@
 
       //This function is what is calling the values
       function eqfeed_callback(results) {
-        const heatmapData = [];
+        const heatmapData = [];    // creates a list for the heat map data
 
         for (let i = 0; i < results.features.length; i++) {
           const coords = results.features[i].geometry.coordinates;
           const latLng = new google.maps.LatLng(coords[1], coords[0]);
           heatmapData.push(latLng);
         }
-        const heatmap = new google.maps.visualization.HeatmapLayer({
-          data: heatmapData,
+        const heatmap = new google.maps.visualization.HeatmapLayer({  //the visualization is created via module
+          data: heatmapData,   //calls on the previous list
           dissipating: false,
           map: map,
         });
